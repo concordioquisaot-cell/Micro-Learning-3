@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essential Micro Learning in the Age of AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            min-height: 90vh;
+            position: relative;
+        }
+        
+        .sidebar {
+            width: 25%;
+            background: linear-gradient(to bottom, #2c3e50, #4a6491);
+            color: white;
+            padding: 25px 15px;
+            overflow-y: auto;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .content {
+            width: 75%;
+            padding: 35px;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+        
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+        
+        .topic-list {
+            list-style: none;
+            max-height: 65vh;
+            overflow-y: auto;
+            padding-right: 5px;
+            flex-grow: 1;
+        }
+        
+        .topic-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .topic-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .topic-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+        
+        .topic-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid transparent;
+        }
+        
+        .topic-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(3px);
+        }
+        
+        .topic-item.active {
+            background: rgba(52, 152, 219, 0.3);
+            border-left: 4px solid #3498db;
+            font-weight: 600;
+        }
+        
+        .topic-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .topic-desc {
+            font-size: 12px;
+            opacity: 0.8;
+            padding-left: 24px;
+        }
+        
+        .topic-icon {
+            margin-right: 10px;
+            font-size: 14px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .copyright {
+            margin-bottom: 5px;
+        }
+        
+        .content-title {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .content-description {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #34495e;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .narrative-section {
+            margin-top: 30px;
+        }
+        
+        .narrative-title {
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        .narrative-content {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .narrative-content p {
+            margin-bottom: 15px;
+        }
+        
+        .steps-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border-top: 4px solid #3498db;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .step-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .step-desc {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #7f8c8d;
+        }
+        
+        .learning-outcomes {
+            margin-top: 40px;
+            background: #e8f4fc;
+            padding: 25px;
+            border-radius: 12px;
+        }
+        
+        .outcomes-title {
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .outcomes-list {
+            list-style-type: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 10px;
+        }
+        
+        .outcomes-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .outcomes-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .progress-container {
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #ecf0f1;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            width: 25%;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 1200px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar, .content {
+                width: 100%;
+            }
+            
+            .sidebar {
+                max-height: 300px;
+            }
+            
+            .topic-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 10px;
+            }
+            
+            .topic-item {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="main-title">Essential Micro Learning in the Age of AI</h1>
+                <p class="subtitle">20 essential skills for the AI era</p>
+            </div>
+            
+            <ul class="topic-list">
+                <li class="topic-item active" data-topic="1">
+                    <div class="topic-title"><i class="fas fa-keyboard topic-icon"></i>Prompt Craft 101</div>
+                    <div class="topic-desc">The Art of Speaking to AI</div>
+                </li>
+                <li class="topic-item" data-topic="2">
+                    <div class="topic-title"><i class="fas fa-tools topic-icon"></i>AI Tool Stacking</div>
+                    <div class="topic-desc">Building Your Productivity Engine</div>
+                </li>
+                <li class="topic-item" data-topic="3">
+                    <div class="topic-title"><i class="fas fa-brain topic-icon"></i>Critical Thinking</div>
+                    <div class="topic-desc">Detecting AI Hallucinations</div>
+                </li>
+                <li class="topic-item" data-topic="4">
+                    <div class="topic-title"><i class="fas fa-lightbulb topic-icon"></i>AI for Ideation</div>
+                    <div class="topic-desc">Creative Breakthroughs</div>
+                </li>
+                <li class="topic-item" data-topic="5">
+                    <div class="topic-title"><i class="fas fa-code-branch topic-icon"></i>Algorithmic Awareness</div>
+                    <div class="topic-desc">Decoding Your Digital Feed</div>
+                </li>
+                <li class="topic-item" data-topic="6">
+                    <div class="topic-title"><i class="fas fa-chart-bar topic-icon"></i>Data Fluency</div>
+                    <div class="topic-desc">For Non-Data Scientists</div>
+                </li>
+                <li class="topic-item" data-topic="7">
+                    <div class="topic-title"><i class="fas fa-user-shield topic-icon"></i>Digital Privacy Hygiene</div>
+                    <div class="topic-desc">Protecting Your Future Self</div>
+                </li>
+                <li class="topic-item" data-topic="8">
+                    <div class="topic-title"><i class="fas fa-newspaper topic-icon"></i>Media Literacy</div>
+                    <div class="topic-desc">10-Minute Credibility Check</div>
+                </li>
+                <li class="topic-item" data-topic="9">
+                    <div class="topic-title"><i class="fas fa-question-circle topic-icon"></i>Asking Powerful Questions</div>
+                    <div class="topic-desc">The Socratic Method in AI Era</div>
+                </li>
+                <li class="topic-item" data-topic="10">
+                    <div class="topic-title"><i class="fas fa-book-open topic-icon"></i>Narrative Intelligence</div>
+                    <div class="topic-desc">The Art of Persuasive Storytelling</div>
+                </li>
+                <li class="topic-item" data-topic="11">
+                    <div class="topic-title"><i class="fas fa-comments topic-icon"></i>Feedback in Hybrid World</div>
+                    <div class="topic-desc">Giving & Receiving Effectively</div>
+                </li>
+                <li class="topic-item" data-topic="12">
+                    <div class="topic-title"><i class="fas fa-seedling topic-icon"></i>Beginner's Mindset</div>
+                    <div class="topic-desc">Cultivating Continuous Curiosity</div>
+                </li>
+                <li class="topic-item" data-topic="13">
+                    <div class="topic-title"><i class="fas fa-chart-line topic-icon"></i>Personal KPIs</div>
+                    <div class="topic-desc">Measuring Your Own Growth</div>
+                </li>
+                <li class="topic-item" data-topic="14">
+                    <div class="topic-title"><i class="fas fa-project-diagram topic-icon"></i>Business Model Canvas</div>
+                    <div class="topic-desc">5-Minute Company Analysis</div>
+                </li>
+                <li class="topic-item" data-topic="15">
+                    <div class="topic-title"><i class="fas fa-sitemap topic-icon"></i>Systems Thinking</div>
+                    <div class="topic-desc">Seeing the Forest, Not Just Trees</div>
+                </li>
+                <li class="topic-item" data-topic="16">
+                    <div class="topic-title"><i class="fas fa-id-badge topic-icon"></i>Personal Branding</div>
+                    <div class="topic-desc">For the Quiet Professional</div>
+                </li>
+                <li class="topic-item" data-topic="17">
+                    <div class="topic-title"><i class="fas fa-bolt topic-icon"></i>Rapid Skill Acquisition</div>
+                    <div class="topic-desc">The First 20 Hours Method</div>
+                </li>
+                <li class="topic-item" data-topic="18">
+                    <div class="topic-title"><i class="fas fa-mobile-alt topic-icon"></i>Digital Minimalism</div>
+                    <div class="topic-desc">Curating Your Cognitive Space</div>
+                </li>
+                <li class="topic-item" data-topic="19">
+                    <div class="topic-title"><i class="fas fa-puzzle-piece topic-icon"></i>Prototyping Mindset</div>
+                    <div class="topic-desc">"Fail Fast" Applied to Life</div>
+                </li>
+                <li class="topic-item" data-topic="20">
+                    <div class="topic-title"><i class="fas fa-graduation-cap topic-icon"></i>Intellectual Humility</div>
+                    <div class="topic-desc">The Strength of "I Don't Know"</div>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <div class="copyright">Xfor Inc. Copyright 2025 All Rights Reserved.</div>
+                <div>90173200333</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <h1 class="content-title">Prompt Craft 101: The Art of Speaking to AI</h1>
+            <div class="content-description">
+                Move beyond simple queries. Learn the structures and principles for crafting prompts that generate precise, creative, and actionable outputs from AI models. This foundational skill transforms AI from a novelty into a powerful co-pilot for your work and creativity.
+            </div>
+            
+            <div class="narrative-section">
+                <h2 class="narrative-title">Course Narrative</h2>
+                <div class="narrative-content">
+                    <p>This micro-learning course is designed to transform your interactions with AI from basic question-answering to sophisticated co-creation. Through a series of progressive modules, you'll learn how to structure prompts that elicit high-quality, nuanced, and contextually appropriate responses from AI systems.</p>
+                    <p>We begin by exploring the psychology of human-AI communication, establishing why precise language matters when interacting with large language models. You'll discover how AI interprets context, follows instructions, and generates responses based on subtle cues in your prompts.</p>
+                    <p>The course progresses through practical applications across various domains - from creative writing and technical documentation to data analysis and problem-solving. Each module builds upon the previous, creating a comprehensive framework for AI communication mastery.</p>
+                </div>
+                
+                <h2 class="narrative-title">Learning Pathway</h2>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Foundation Principles</div>
+                        <div class="step-desc">Understand the core concepts of tokens, context windows, and how AI models process language.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Prompt Structures</div>
+                        <div class="step-desc">Learn different prompt frameworks: role-playing, chain-of-thought, and example-driven prompting.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Iterative Refinement</div>
+                        <div class="step-desc">Master the art of analyzing AI outputs and refining your prompts for better results.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Advanced Techniques</div>
+                        <div class="step-desc">Explore temperature settings, few-shot learning, and controlling output format and style.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="progress-container">
+                <h2 class="narrative-title">Your Learning Progress</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">
+                    <span>5% Complete</span>
+                    <span>1 of 20 Topics</span>
+                </div>
+            </div>
+            
+            <div class="learning-outcomes">
+                <h2 class="outcomes-title">Learning Outcomes</h2>
+                <ul class="outcomes-list">
+                    <li>Articulate the difference between effective and ineffective AI prompts</li>
+                    <li>Structure multi-step prompts for complex tasks</li>
+                    <li>Apply role-playing techniques to get specialized outputs</li>
+                    <li>Iteratively refine prompts based on AI responses</li>
+                    <li>Control output format, tone, and style consistently</li>
+                    <li>Troubleshoot and improve unsatisfactory AI responses</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicItems = document.querySelectorAll('.topic-item');
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.querySelector('.progress-text span:first-child');
+            const progressCount = document.querySelector('.progress-text span:last-child');
+            
+            // Define all 20 topics with their complete content
+            const narratives = {
+                1: {
+                    title: "Prompt Craft 101: The Art of Speaking to AI",
+                    description: "Move beyond simple queries. Learn the structures and principles for crafting prompts that generate precise, creative, and actionable outputs from AI models. This foundational skill transforms AI from a novelty into a powerful co-pilot for your work and creativity.",
+                    narrative: `<p>This micro-learning course is designed to transform your interactions with AI from basic question-answering to sophisticated co-creation. Through a series of progressive modules, you'll learn how to structure prompts that elicit high-quality, nuanced, and contextually appropriate responses from AI systems.</p>
+                    <p>We begin by exploring the psychology of human-AI communication, establishing why precise language matters when interacting with large language models. You'll discover how AI interprets context, follows instructions, and generates responses based on subtle cues in your prompts.</p>
+                    <p>The course progresses through practical applications across various domains - from creative writing and technical documentation to data analysis and problem-solving. Each module builds upon the previous, creating a comprehensive framework for AI communication mastery.</p>`,
+                    steps: [
+                        { number: "1", title: "Foundation Principles", desc: "Understand the core concepts of tokens, context windows, and how AI models process language." },
+                        { number: "2", title: "Prompt Structures", desc: "Learn different prompt frameworks: role-playing, chain-of-thought, and example-driven prompting." },
+                        { number: "3", title: "Iterative Refinement", desc: "Master the art of analyzing AI outputs and refining your prompts for better results." },
+                        { number: "4", title: "Advanced Techniques", desc: "Explore temperature settings, few-shot learning, and controlling output format and style." }
+                    ],
+                    outcomes: [
+                        "Articulate the difference between effective and ineffective AI prompts",
+                        "Structure multi-step prompts for complex tasks",
+                        "Apply role-playing techniques to get specialized outputs",
+                        "Iteratively refine prompts based on AI responses",
+                        "Control output format, tone, and style consistently",
+                        "Troubleshoot and improve unsatisfactory AI responses"
+                    ]
+                },
+                2: {
+                    title: "AI Tool Stacking: Building Your Productivity Engine",
+                    description: "Learn how to strategically combine different AI tools (e.g., a writing assistant, a research bot, a data analyzer) into a seamless workflow that amplifies your output. Discover integration patterns and automation strategies that create synergistic effects.",
+                    narrative: `<p>This course focuses on the strategic integration of multiple AI tools to create a personalized productivity system. We'll explore how different AI applications can work together, creating workflows that are greater than the sum of their parts.</p>
+                    <p>You'll learn to identify your unique workflow patterns and pain points, then systematically address them with targeted AI solutions. We'll cover everything from simple automation to complex multi-tool orchestration, with practical examples from various professional domains.</p>
+                    <p>The course emphasizes sustainable tool integration - avoiding tool fatigue while maximizing productivity gains. You'll develop a framework for evaluating new AI tools and integrating them into your existing stack without disrupting your workflow.</p>`,
+                    steps: [
+                        { number: "1", title: "Workflow Analysis", desc: "Map your current processes and identify automation opportunities." },
+                        { number: "2", title: "Tool Selection", desc: "Evaluate and select AI tools that address specific workflow gaps." },
+                        { number: "3", title: "Integration Patterns", desc: "Learn common integration strategies for connecting multiple AI tools." },
+                        { number: "4", title: "Automation Design", desc: "Design automated workflows that minimize manual intervention." }
+                    ],
+                    outcomes: [
+                        "Analyze workflows to identify AI automation opportunities",
+                        "Select appropriate AI tools for specific tasks and integration points",
+                        "Design connected systems of AI tools that work synergistically",
+                        "Implement automation that reduces manual work by 40-60%",
+                        "Create personal productivity dashboards for monitoring AI-assisted workflows",
+                        "Develop criteria for evaluating and adopting new AI tools"
+                    ]
+                },
+                3: {
+                    title: "Critical Thinking in the Age of AI-Hallucinations",
+                    description: "Develop the skill to rigorously fact-check, verify, and critique AI-generated content. Learn the red flags and validation techniques to ensure reliability. This critical skill protects you from misinformation while leveraging AI capabilities.",
+                    narrative: `<p>As AI becomes more integrated into our information ecosystems, the ability to critically evaluate AI-generated content becomes essential. This course provides a comprehensive framework for identifying and addressing AI hallucinations, biases, and inaccuracies.</p>
+                    <p>We'll explore the technical reasons why AI systems sometimes generate plausible but incorrect information, and develop practical strategies for verification. The course covers both obvious red flags and more subtle indicators of unreliable content.</p>
+                    <p>Beyond simple fact-checking, you'll learn to evaluate the reasoning, context, and potential biases in AI responses. This critical thinking framework applies across all AI interactions, from research assistance to creative collaboration.</p>`,
+                    steps: [
+                        { number: "1", title: "Hallucination Recognition", desc: "Identify common patterns and red flags in AI-generated content." },
+                        { number: "2", title: "Verification Protocols", desc: "Develop systematic approaches to verify AI-generated information." },
+                        { number: "3", title: "Bias Detection", desc: "Recognize and account for biases in training data and model outputs." },
+                        { number: "4", title: "Critical Evaluation", desc: "Apply structured critical thinking to assess AI reasoning and conclusions." }
+                    ],
+                    outcomes: [
+                        "Identify at least 5 common patterns of AI hallucinations",
+                        "Apply a systematic verification protocol to AI-generated content",
+                        "Detect potential biases in AI responses and training data",
+                        "Evaluate the logical coherence and reasoning in AI outputs",
+                        "Develop confidence intervals for different types of AI-generated information",
+                        "Create personal guidelines for when to trust vs. verify AI outputs"
+                    ]
+                },
+                4: {
+                    title: "AI for Ideation & Creative Breakthroughs",
+                    description: "Use AI as a boundless brainstorming partner. Learn techniques to overcome creative blocks and generate novel concepts, metaphors, and solutions you wouldn't have considered alone. Transform your creative process with AI-enhanced thinking.",
+                    narrative: `<p>This course transforms AI from a simple content generator into a creative collaborator. We'll explore advanced techniques for using AI to enhance human creativity, break through mental blocks, and discover novel solutions to complex problems.</p>
+                    <p>You'll learn structured approaches to creative collaboration with AI, moving beyond simple prompt-and-response interactions into true creative partnership. The course covers techniques from diverse creative domains including writing, design, strategy, and innovation.</p>
+                    <p>We'll examine the psychology of creativity and how AI can augment different stages of the creative process - from initial inspiration to refinement and execution. You'll develop a personalized AI-enhanced creative workflow that matches your thinking style and creative goals.</p>`,
+                    steps: [
+                        { number: "1", title: "Creative Foundations", desc: "Understand how AI can augment different aspects of human creativity." },
+                        { number: "2", title: "Brainstorming Techniques", desc: "Learn structured approaches to AI-assisted idea generation." },
+                        { number: "3", title: "Concept Development", desc: "Use AI to refine and develop raw ideas into viable concepts." },
+                        { number: "4", title: "Creative Workflows", desc: "Design personalized creative processes that integrate AI collaboration." }
+                    ],
+                    outcomes: [
+                        "Apply 5+ different AI-assisted brainstorming techniques",
+                        "Use AI to overcome specific types of creative blocks",
+                        "Develop raw ideas into fully-formed concepts using AI collaboration",
+                        "Design personalized creative workflows that integrate AI tools",
+                        "Generate novel solutions to complex problems using AI-enhanced thinking",
+                        "Evaluate and select the most promising ideas from AI-generated options"
+                    ]
+                },
+                5: {
+                    title: "Algorithmic Awareness: Decoding Your Digital Feed",
+                    description: "Understand how recommendation algorithms shape your perception, buying habits, and beliefs. Learn to consciously curate your digital inputs for better thinking. This meta-skill helps you maintain agency in an algorithm-driven world.",
+                    narrative: `<p>In an age of algorithmic curation, understanding how these systems work is essential for maintaining cognitive autonomy. This course provides a comprehensive look at how recommendation algorithms shape our digital experiences and, consequently, our thinking.</p>
+                    <p>We'll explore the technical foundations of major recommendation systems used by social media platforms, news aggregators, and content services. You'll learn how these algorithms optimize for engagement, and what psychological triggers they exploit to capture attention.</p>
+                    <p>More importantly, you'll develop practical strategies for consciously curating your digital environment. This includes techniques for breaking out of filter bubbles, diversifying your information sources, and maintaining critical distance from algorithmically optimized content.</p>`,
+                    steps: [
+                        { number: "1", title: "Algorithm Fundamentals", desc: "Understand how major recommendation and curation algorithms work." },
+                        { number: "2", title: "Attention Economics", desc: "Learn how platforms optimize for engagement and capture attention." },
+                        { number: "3", title: "Curational Strategies", desc: "Develop techniques for consciously curating your digital inputs." },
+                        { number: "4", title: "Cognitive Autonomy", desc: "Maintain independent thinking in algorithmically shaped environments." }
+                    ],
+                    outcomes: [
+                        "Explain how at least 3 major recommendation algorithms work",
+                        "Identify engagement optimization techniques used by digital platforms",
+                        "Implement personal curation strategies to diversify information sources",
+                        "Recognize and counter filter bubble effects in your digital consumption",
+                        "Design a personal media diet that supports critical thinking",
+                        "Maintain cognitive autonomy while using algorithmically driven platforms"
+                    ]
+                },
+                6: {
+                    title: "Data Fluency for Non-Data Scientists",
+                    description: "Learn to read, interpret, and question charts, graphs, and metrics. Understand basic statistical concepts like correlation vs. causation to make informed decisions. Navigate data-rich environments with confidence.",
+                    narrative: `<p>In our data-saturated world, the ability to understand and interpret data is no longer a specialized skill but a fundamental literacy. This course provides a practical foundation in data fluency for professionals who don't have formal data science training.</p>
+                    <p>We'll focus on developing your ability to critically evaluate data visualizations, understand basic statistical concepts, and ask the right questions about data presented to you. The course emphasizes practical application over theoretical knowledge.</p>
+                    <p>You'll learn to spot common data manipulation techniques, understand the limitations of different data collection methods, and make better decisions based on quantitative evidence. This skillset is increasingly essential for effective leadership and informed citizenship.</p>`,
+                    steps: [
+                        { number: "1", title: "Data Visualization Literacy", desc: "Learn to read and interpret common charts, graphs, and dashboards." },
+                        { number: "2", title: "Statistical Fundamentals", desc: "Understand basic concepts like distributions, averages, and margins of error." },
+                        { number: "3", title: "Critical Data Questions", desc: "Develop a framework for questioning data sources and methodologies." },
+                        { number: "4", title: "Data-Informed Decision Making", desc: "Apply data insights to practical business and personal decisions." }
+                    ],
+                    outcomes: [
+                        "Interpret common data visualizations and identify potential misrepresentations",
+                        "Distinguish between correlation and causation in data analysis",
+                        "Evaluate the reliability of data sources and collection methods",
+                        "Ask critical questions about data presented in business contexts",
+                        "Make informed decisions using quantitative evidence",
+                        "Communicate data insights effectively to diverse audiences"
+                    ]
+                },
+                7: {
+                    title: "Digital Privacy Hygiene: Protecting Your Future Self",
+                    description: "A practical guide to the essential steps for securing your personal data, understanding digital footprints, and managing your online identity. Build sustainable privacy practices for the AI era.",
+                    narrative: `<p>As AI systems become more integrated into our daily lives, digital privacy takes on new dimensions of importance. This course provides a comprehensive approach to personal data protection in an era of pervasive data collection and AI analysis.</p>
+                    <p>We'll move beyond scare tactics to develop practical, sustainable privacy habits that fit into your existing workflow. The course covers everything from basic password hygiene to advanced techniques for minimizing your digital footprint.</p>
+                    <p>You'll learn how different entities collect and use your data, what rights you have regarding your digital information, and how to exercise those rights effectively. The focus is on building privacy practices that protect you without making digital life inconvenient.</p>`,
+                    steps: [
+                        { number: "1", title: "Digital Footprint Analysis", desc: "Map your current digital presence and identify privacy risks." },
+                        { number: "2", title: "Essential Privacy Tools", desc: "Implement practical tools for securing your online activities." },
+                        { number: "3", title: "Data Rights Management", desc: "Understand and exercise your rights regarding personal data." },
+                        { number: "4", title: "Sustainable Privacy Habits", desc: "Develop lasting practices that protect your digital future." }
+                    ],
+                    outcomes: [
+                        "Conduct a comprehensive audit of your digital footprint",
+                        "Implement essential privacy tools and settings across your devices",
+                        "Understand and exercise your legal rights regarding personal data",
+                        "Develop sustainable privacy habits that integrate into daily life",
+                        "Evaluate privacy implications of new technologies and services",
+                        "Create a personal privacy policy for guiding future digital decisions"
+                    ]
+                },
+                8: {
+                    title: "The 10-Minute Media Literacy Check",
+                    description: "A micro-framework to quickly assess the credibility of a news article, social media post, or online source before you internalize or share it. Build resilience against misinformation.",
+                    narrative: `<p>In our accelerated information environment, the ability to quickly evaluate sources is more valuable than ever. This course provides a practical framework for rapid credibility assessment that you can apply in minutes.</p>
+                    <p>We'll develop a systematic approach to evaluating online information, focusing on practical heuristics rather than exhaustive research. The course covers both traditional media sources and emerging content formats like social media posts and AI-generated content.</p>
+                    <p>You'll learn to spot red flags, identify reliable indicators of credibility, and make informed decisions about what information to trust and share. This skill is essential for navigating modern information ecosystems without becoming overwhelmed.</p>`,
+                    steps: [
+                        { number: "1", title: "Source Evaluation Framework", desc: "Learn a systematic approach to assessing information credibility." },
+                        { number: "2", title: "Red Flag Identification", desc: "Recognize common indicators of unreliable or misleading content." },
+                        { number: "3", title: "Contextual Analysis", desc: "Evaluate information within its broader context and ecosystem." },
+                        { number: "4", title: "Rapid Verification Techniques", desc: "Apply quick verification methods for time-sensitive decisions." }
+                    ],
+                    outcomes: [
+                        "Apply a 10-minute credibility assessment to any information source",
+                        "Identify at least 5 common red flags in online content",
+                        "Distinguish between different types of bias in media reporting",
+                        "Use basic fact-checking tools and techniques effectively",
+                        "Make informed decisions about sharing information online",
+                        "Develop personal guidelines for trusting different types of sources"
+                    ]
+                },
+                9: {
+                    title: "Asking Powerful Questions",
+                    description: "In a world of easy answers, the quality of your questions defines your edge. Learn the Socratic method and other frameworks to unlock deeper understanding and innovation.",
+                    narrative: `<p>As AI makes answers increasingly accessible, the ability to ask insightful questions becomes the true differentiator. This course explores the art and science of questioning as a fundamental thinking skill.</p>
+                    <p>We'll examine different questioning frameworks from various disciplines, including the Socratic method, design thinking, and scientific inquiry. You'll learn how different types of questions serve different purposes in exploration and problem-solving.</p>
+                    <p>The course emphasizes developing your questioning mindset - learning to approach situations with curiosity rather than certainty. You'll practice reframing problems, challenging assumptions, and using questions to drive both individual and collective learning.</p>`,
+                    steps: [
+                        { number: "1", title: "Question Typology", desc: "Understand different types of questions and their purposes." },
+                        { number: "2", title: "Socratic Framing", desc: "Learn to use questioning to expose assumptions and deepen understanding." },
+                        { number: "3", title: "Creative Questioning", desc: "Apply questioning techniques to generate novel ideas and solutions." },
+                        { number: "4", title: "Questioning in Context", desc: "Adapt questioning approaches to different situations and audiences." }
+                    ],
+                    outcomes: [
+                        "Articulate the difference between open, closed, and probing questions",
+                        "Apply Socratic questioning to expose assumptions and clarify thinking",
+                        "Use questioning techniques to generate creative insights",
+                        "Adapt questioning style to different contexts and purposes",
+                        "Facilitate group inquiry and collective sense-making",
+                        "Develop a personal questioning practice for continuous learning"
+                    ]
+                },
+                10: {
+                    title: "Narrative Intelligence: The Art of Persuasive Storytelling",
+                    description: "Data convinces, but stories persuade. Learn to structure information into compelling narratives that capture attention, drive change, and make your ideas memorable.",
+                    narrative: `<p>In an attention-scarce world, the ability to craft compelling narratives is a superpower. This course explores how to transform information and ideas into stories that resonate, persuade, and inspire action.</p>
+                    <p>We'll examine the cognitive science behind why stories are so effective, and learn practical frameworks for narrative construction. The course covers everything from personal anecdotes to organizational change narratives.</p>
+                    <p>You'll develop skills in identifying narrative opportunities, structuring compelling story arcs, and adapting your storytelling to different audiences and mediums. This ability is essential for leadership, innovation, and effective communication in any field.</p>`,
+                    steps: [
+                        { number: "1", title: "Story Foundations", desc: "Understand the cognitive and emotional impact of storytelling." },
+                        { number: "2", title: "Narrative Structures", desc: "Learn classic and modern story frameworks for different purposes." },
+                        { number: "3", title: "Character and Conflict", desc: "Develop compelling characters and meaningful conflicts in your narratives." },
+                        { number: "4", title: "Adaptive Storytelling", desc: "Tailor your stories to different audiences, contexts, and mediums." }
+                    ],
+                    outcomes: [
+                        "Articulate why stories are cognitively and emotionally compelling",
+                        "Apply at least 3 different narrative structures to your content",
+                        "Develop characters and conflicts that engage your audience",
+                        "Adapt storytelling techniques to different communication contexts",
+                        "Use stories to make data and abstract concepts memorable",
+                        "Create persuasive narratives for change and innovation"
+                    ]
+                },
+                11: {
+                    title: "Giving & Receiving Feedback in a Hybrid World",
+                    description: "Master the delicate art of delivering constructive criticism and receiving feedback with grace, especially in digital and asynchronous environments.",
+                    narrative: `<p>As work becomes increasingly hybrid and distributed, the skills of giving and receiving feedback need to adapt to new communication contexts. This course provides a modern framework for effective feedback in digital environments.</p>
+                    <p>We'll explore how to deliver feedback that lands well in text-based, video, and asynchronous formats. You'll learn techniques for ensuring your feedback is constructive, specific, and actionable regardless of the medium.</p>
+                    <p>The course also covers receiving feedback with openness and resilience, especially when it comes through digital channels that can strip away important contextual cues. You'll develop practices for extracting maximum value from feedback while maintaining psychological safety.</p>`,
+                    steps: [
+                        { number: "1", title: "Feedback Foundations", desc: "Understand the psychology and principles of effective feedback." },
+                        { number: "2", title: "Digital Delivery", desc: "Adapt feedback techniques for text, video, and asynchronous contexts." },
+                        { number: "3", title: "Receiving with Grace", desc: "Develop practices for receiving feedback openly and productively." },
+                        { number: "4", title: "Feedback Culture", desc: "Contribute to creating feedback-rich environments in hybrid teams." }
+                    ],
+                    outcomes: [
+                        "Deliver constructive feedback effectively across different digital mediums",
+                        "Apply frameworks for making feedback specific, actionable, and kind",
+                        "Receive feedback with openness and extract maximum learning value",
+                        "Navigate cultural and contextual differences in feedback expectations",
+                        "Create psychological safety for feedback exchanges in hybrid teams",
+                        "Develop personal rituals for processing and acting on feedback"
+                    ]
+                },
+                12: {
+                    title: "Cultivating a Beginner's Mindset",
+                    description: "Learn techniques to consciously shed expertise bias, embrace curiosity, and remain open to new possibilities—a critical skill when old models are constantly disrupted.",
+                    narrative: `<p>In times of rapid change, the ability to approach situations with fresh eyes becomes increasingly valuable. This course explores how to cultivate what Zen practitioners call 'beginner's mind' - an attitude of openness and curiosity.</p>
+                    <p>We'll examine the cognitive barriers that prevent experts from seeing new possibilities, and develop practices for temporarily setting aside expertise to make room for novel insights. The course blends Eastern philosophical approaches with modern cognitive science.</p>
+                    <p>You'll learn specific techniques for disrupting habitual thinking patterns, embracing productive uncertainty, and maintaining curiosity in the face of complexity. This mindset is essential for continuous learning and adaptation in fast-changing environments.</p>`,
+                    steps: [
+                        { number: "1", title: "Expertise Awareness", desc: "Recognize how expertise can create blind spots and limitations." },
+                        { number: "2", title: "Curiosity Practices", desc: "Develop daily habits for maintaining and strengthening curiosity." },
+                        { number: "3", title: "Unlearning Techniques", desc: "Learn methods for temporarily setting aside established knowledge." },
+                        { number: "4", title: "Integrated Mindset", desc: "Balance beginner's mind with expert knowledge when appropriate." }
+                    ],
+                    outcomes: [
+                        "Articulate the value and limitations of expertise in learning",
+                        "Apply at least 3 techniques for cultivating curiosity in daily life",
+                        "Recognize and counter expertise-induced blind spots",
+                        "Approach familiar problems with fresh perspectives",
+                        "Balance beginner's openness with expert knowledge effectively",
+                        "Create conditions that foster beginner's mind in teams and organizations"
+                    ]
+                },
+                13: {
+                    title: "Personal KPIs: Measuring Your Own Growth",
+                    description: "Translate corporate performance concepts to your personal life. Learn to define and track Key Performance Indicators for your health, learning, and career goals.",
+                    narrative: `<p>What gets measured gets managed - and this principle applies to personal growth as much as business performance. This course teaches you how to apply performance measurement concepts to your personal development.</p>
+                    <p>We'll explore how to identify the metrics that truly matter for your growth objectives, set up simple tracking systems, and use data to inform your personal development decisions. The course emphasizes meaningful measurement over mere quantification.</p>
+                    <p>You'll learn to avoid common pitfalls in personal metrics, such as optimizing for what's easy to measure rather than what's important. The focus is on creating a personal dashboard that provides genuine insight into your growth journey.</p>`,
+                    steps: [
+                        { number: "1", title: "Goal Clarification", desc: "Define clear personal growth objectives across life domains." },
+                        { number: "2", title: "Metric Selection", desc: "Identify meaningful indicators that reflect progress toward goals." },
+                        { number: "3", title: "Tracking Systems", desc: "Set up simple, sustainable systems for monitoring your KPIs." },
+                        { number: "4", title: "Data-Informed Adjustment", desc: "Use your personal metrics to inform growth decisions and course corrections." }
+                    ],
+                    outcomes: [
+                        "Define clear personal growth objectives in key life domains",
+                        "Select meaningful metrics that accurately reflect progress",
+                        "Set up sustainable tracking systems for personal KPIs",
+                        "Interpret personal metrics to inform development decisions",
+                        "Avoid common pitfalls in personal performance measurement",
+                        "Create a personal dashboard that provides genuine growth insights"
+                    ]
+                },
+                14: {
+                    title: "The 5-Minute Business Model Canvas",
+                    description: "A rapid deconstruction of any company's or project's core logic. This mental model allows you to understand value creation and competitive advantage at a glance.",
+                    narrative: `<p>Business literacy is no longer just for business people. This course teaches you a powerful mental model for quickly understanding how any organization creates and captures value.</p>
+                    <p>We'll explore the Business Model Canvas framework and learn how to apply it rapidly to understand companies, projects, or even personal ventures. The course focuses on practical application rather than theoretical business knowledge.</p>
+                    <p>You'll develop the ability to 'see through' business structures to understand their fundamental logic, identify potential vulnerabilities, and recognize innovation opportunities. This skill is valuable for investors, job seekers, partners, or anyone navigating complex organizational ecosystems.</p>`,
+                    steps: [
+                        { number: "1", title: "Canvas Fundamentals", desc: "Understand the nine building blocks of any business model." },
+                        { number: "2", title: "Rapid Analysis", desc: "Learn to quickly map any organization's business model." },
+                        { number: "3", title: "Pattern Recognition", desc: "Identify common business model patterns and their implications." },
+                        { number: "4", title: "Innovation Spotting", desc: "Recognize business model innovations and disruption opportunities." }
+                    ],
+                    outcomes: [
+                        "Articulate the nine components of the Business Model Canvas",
+                        "Conduct a 5-minute business model analysis of any organization",
+                        "Identify common business model patterns and their strengths/weaknesses",
+                        "Recognize business model innovations and disruption opportunities",
+                        "Apply business model thinking to personal projects and career decisions",
+                        "Participate knowledgeably in strategic business conversations"
+                    ]
+                },
+                15: {
+                    title: "Systems Thinking: Seeing the Forest, Not Just the Trees",
+                    description: "An introduction to identifying feedback loops, leverage points, and unintended consequences in complex systems, from projects to global markets.",
+                    narrative: `<p>In our interconnected world, the ability to see systems rather than just isolated parts is increasingly crucial. This course provides an introduction to systems thinking as a practical problem-solving approach.</p>
+                    <p>We'll learn to identify feedback loops, recognize system archetypes, and find leverage points for effective intervention. The course focuses on applying systems thinking to real-world challenges in organizations, communities, and personal life.</p>
+                    <p>You'll develop mental models for understanding complexity, anticipating unintended consequences, and designing more robust solutions. This way of thinking is essential for tackling the kind of multi-faceted challenges that characterize the modern world.</p>`,
+                    steps: [
+                        { number: "1", title: "Systems Fundamentals", desc: "Understand key concepts like feedback loops and emergence." },
+                        { number: "2", title: "Mapping Techniques", desc: "Learn to visualize systems and identify interconnections." },
+                        { number: "3", title: "Leverage Points", desc: "Identify places in systems where small changes create big impacts." },
+                        { number: "4", title: "Applied Systems Thinking", desc: "Apply systems thinking to personal, organizational, and social challenges." }
+                    ],
+                    outcomes: [
+                        "Articulate the difference between linear and systems thinking",
+                        "Identify feedback loops and system archetypes in complex situations",
+                        "Create simple system maps to visualize interconnections",
+                        "Recognize leverage points for effective system intervention",
+                        "Anticipate unintended consequences of decisions and actions",
+                        "Apply systems thinking to personal and professional challenges"
+                    ]
+                },
+                16: {
+                    title: "Personal Branding for the Quiet Professional",
+                    description: "It's not about being loudest online. Learn how to build an authentic reputation through consistent project quality, thought leadership, and strategic networking.",
+                    narrative: `<p>Personal branding isn't just for influencers and extroverts. This course redefines personal branding for professionals who prefer to let their work speak for itself while still building recognition and opportunity.</p>
+                    <p>We'll explore how to build an authentic professional reputation through quality work, strategic visibility, and meaningful connections. The course focuses on sustainable approaches that align with your personality and values.</p>
+                    <p>You'll learn to identify your unique professional value, communicate it effectively, and build a reputation that opens doors without requiring constant self-promotion. This approach to personal branding creates lasting professional capital rather than fleeting visibility.</p>`,
+                    steps: [
+                        { number: "1", title: "Authentic Value Identification", desc: "Articulate your unique professional value proposition." },
+                        { number: "2", title: "Strategic Visibility", desc: "Choose visibility opportunities that align with your strengths and goals." },
+                        { number: "3", title: "Network Development", desc: "Build meaningful professional relationships authentically." },
+                        { number: "4", title: "Reputation Management", desc: "Cultivate a professional reputation that reflects your actual capabilities." }
+                    ],
+                    outcomes: [
+                        "Articulate your authentic professional value proposition",
+                        "Identify strategic visibility opportunities that suit your style",
+                        "Build a professional network based on genuine relationships",
+                        "Develop a reputation that accurately reflects your capabilities",
+                        "Navigate professional visibility without uncomfortable self-promotion",
+                        "Create a personal branding approach that grows with your career"
+                    ]
+                },
+                17: {
+                    title: "Rapid Skill Acquisition: The First 20 Hours",
+                    description: "A methodology for breaking down any new skill, deconstructing its components, and practicing deliberately to achieve competency in a shockingly short time.",
+                    narrative: `<p>In a world of constant change, the ability to learn new skills quickly is a superpower. This course teaches a systematic approach to rapid skill acquisition based on the latest learning science.</p>
+                    <p>We'll explore how to deconstruct skills into their fundamental components, eliminate learning barriers, and practice with maximum efficiency. The course focuses on the critical first 20 hours of learning any new skill.</p>
+                    <p>You'll develop a personal toolkit for tackling new domains efficiently, overcoming the initial frustration barrier that stops most learners, and building learning momentum. This approach makes continuous skill development sustainable alongside other responsibilities.</p>`,
+                    steps: [
+                        { number: "1", title: "Skill Deconstruction", desc: "Break down any skill into its core components and sub-skills." },
+                        { number: "2", title: "Barrier Removal", desc: "Identify and eliminate barriers to effective practice." },
+                        { number: "3", title: "Deliberate Practice", desc: "Apply focused practice techniques for maximum learning efficiency." },
+                        { number: "4", title: "Progressive Integration", desc: "Systematically integrate new skills into your repertoire." }
+                    ],
+                    outcomes: [
+                        "Deconstruct any new skill into learnable components",
+                        "Design effective 20-hour learning plans for new skills",
+                        "Apply deliberate practice techniques to accelerate learning",
+                        "Overcome the initial frustration barrier in skill acquisition",
+                        "Create sustainable habits for continuous skill development",
+                        "Track and measure progress in skill acquisition effectively"
+                    ]
+                },
+                18: {
+                    title: "Digital Minimalism: Curating Your Cognitive Space",
+                    description: "Learn the philosophy and practice of intentionally using technology to support your values, rather than letting it drain your attention and focus.",
+                    narrative: `<p>In an age of digital overwhelm, the ability to consciously manage your technological environment is a form of cognitive self-defense. This course explores digital minimalism as a philosophy and practice.</p>
+                    <p>We'll examine how digital technologies capture attention, and develop practices for reclaiming cognitive space. The course focuses on intentional technology use rather than simplistic digital detox approaches.</p>
+                    <p>You'll learn to conduct a digital declutter, establish technology boundaries that support your values, and develop habits that make technology serve you rather than distract you. This approach creates sustainable digital habits for the long term.</p>`,
+                    steps: [
+                        { number: "1", title: "Digital Audit", desc: "Conduct a comprehensive assessment of your current technology use." },
+                        { number: "2", title: "Value Alignment", desc: "Clarify how you want technology to support your values and goals." },
+                        { number: "3", title: "Intentional Design", desc: "Design your digital environment to minimize distraction and maximize value." },
+                        { number: "4", title: "Sustainable Practices", desc: "Develop lasting habits for intentional technology use." }
+                    ],
+                    outcomes: [
+                        "Conduct a comprehensive audit of your current digital habits",
+                        "Articulate how you want technology to support your values",
+                        "Design a personal digital environment that minimizes distraction",
+                        "Implement sustainable practices for intentional technology use",
+                        "Recognize and counter attention-capture techniques in digital products",
+                        "Create a personalized digital minimalism approach for the long term"
+                    ]
+                },
+                19: {
+                    title: "The Prototyping Mindset: 'Fail Fast' Applied to Life",
+                    description: "Apply the agile principle of building quick, low-resolution prototypes to test life and career ideas, minimizing the cost of being wrong.",
+                    narrative: `<p>In uncertain environments, the ability to test ideas quickly and cheaply becomes incredibly valuable. This course teaches how to apply prototyping mindsets from design and technology to life and career decisions.</p>
+                    <p>We'll explore how to create low-fidelity prototypes for career paths, business ideas, and personal projects. The course focuses on learning through doing rather than endless planning.</p>
+                    <p>You'll develop techniques for rapid experimentation, gathering meaningful feedback, and iterating based on real-world data. This approach reduces the risk of major life decisions while increasing the likelihood of finding truly satisfying paths.</p>`,
+                    steps: [
+                        { number: "1", title: "Prototype Thinking", desc: "Understand the principles and benefits of a prototyping approach." },
+                        { number: "2", title: "Idea Generation", desc: "Generate testable ideas for career and life directions." },
+                        { number: "3", title: "Rapid Testing", desc: "Design and execute quick, low-cost experiments." },
+                        { number: "4", title: "Iterative Refinement", desc: "Use experimental results to refine your direction and approach." }
+                    ],
+                    outcomes: [
+                        "Articulate the value of prototyping for uncertain environments",
+                        "Generate testable prototypes for career and life ideas",
+                        "Design and execute low-cost experiments to test assumptions",
+                        "Gather and interpret meaningful feedback from prototypes",
+                        "Iterate on ideas based on experimental results",
+                        "Apply prototyping mindset to reduce risk in major decisions"
+                    ]
+                },
+                20: {
+                    title: "Intellectual Humility: The Strength of 'I Don't Know'",
+                    description: "Explore the cognitive superpower of acknowledging the limits of your knowledge, being open to being wrong, and updating your beliefs in the face of new evidence.",
+                    narrative: `<p>In an age of information abundance and AI-generated content, intellectual humility becomes a critical skill for effective learning and decision-making. This course explores why acknowledging what we don't know is a strength, not a weakness.</p>
+                    <p>You'll learn techniques for recognizing cognitive biases that prevent us from seeing our knowledge gaps, and develop practices for maintaining curiosity in the face of complexity. The course covers both the psychological foundations and practical applications of intellectual humility.</p>
+                    <p>We'll examine how intellectual humility enhances collaboration with AI systems, improves decision-making, and fosters continuous learning. You'll develop a personal framework for balancing confidence in your expertise with openness to new perspectives and information.</p>`,
+                    steps: [
+                        { number: "1", title: "Knowledge Boundaries", desc: "Map the limits of your current understanding and expertise." },
+                        { number: "2", title: "Cognitive Bias Awareness", desc: "Identify biases that prevent acknowledgment of knowledge gaps." },
+                        { number: "3", title: "Curiosity Cultivation", desc: "Develop practices for maintaining open-minded inquiry." },
+                        { number: "4", title: "Belief Updating", desc: "Learn systematic approaches for revising beliefs with new evidence." }
+                    ],
+                    outcomes: [
+                        "Articulate the boundaries of your knowledge in key domains",
+                        "Identify and counter at least 3 cognitive biases that inhibit learning",
+                        "Apply curiosity techniques to complex problems and unfamiliar domains",
+                        "Update beliefs systematically when presented with new evidence",
+                        "Balance confidence in expertise with openness to new perspectives",
+                        "Model intellectual humility in collaborative and leadership contexts"
+                    ]
+                }
+            };
+            
+            // Set up click handlers for all topic items
+            topicItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all items
+                    topicItems.forEach(i => i.classList.remove('active'));
+                    
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    // Update content based on selected topic
+                    const topicId = this.getAttribute('data-topic');
+                    updateContent(topicId);
+                    updateProgress(topicId);
+                });
+            });
+            
+            function updateContent(topicId) {
+                const topic = narratives[topicId];
+                if (!topic) return;
+                
+                const contentTitle = document.querySelector('.content-title');
+                const contentDescription = document.querySelector('.content-description');
+                const narrativeContent = document.querySelector('.narrative-content');
+                const stepsContainer = document.querySelector('.steps-container');
+                const outcomesList = document.querySelector('.outcomes-list');
+                
+                contentTitle.textContent = topic.title;
+                contentDescription.textContent = topic.description;
+                narrativeContent.innerHTML = topic.narrative;
+                
+                // Update steps
+                stepsContainer.innerHTML = '';
+                topic.steps.forEach(step => {
+                    stepsContainer.innerHTML += `
+                        <div class="step">
+                            <div class="step-number">${step.number}</div>
+                            <div class="step-title">${step.title}</div>
+                            <div class="step-desc">${step.desc}</div>
+                        </div>
+                    `;
+                });
+                
+                // Update outcomes
+                outcomesList.innerHTML = '';
+                topic.outcomes.forEach(outcome => {
+                    outcomesList.innerHTML += `<li>${outcome}</li>`;
+                });
+            }
+            
+            function updateProgress(topicId) {
+                const progress = (topicId / 20) * 100;
+                progressFill.style.width = `${progress}%`;
+                progressText.textContent = `${Math.round(progress)}% Complete`;
+                progressCount.textContent = `${topicId} of 20 Topics`;
+            }
+            
+            // Initialize with first topic
+            updateProgress(1);
+        });
+    </script>
+</body>
+</html>
